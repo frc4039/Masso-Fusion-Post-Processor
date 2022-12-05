@@ -51,6 +51,14 @@ properties = {
     value      : true,
     scope      : "post"
   },
+  useParking: { // Noah added December 5th, 2022. Add propery to Fusion list to toggle parking position.
+    title      : "Use parking position",
+    description: "Machine will go to parking position at the end of the program",
+    group      : 0,
+    type       : "boolean",
+    value      : true,
+    scope      : "post"
+  },
   safePositionMethod: {
     title      : "Safe Retracts",
     description: "Select your desired retract option. 'Clearance Height' retracts to the operation clearance height.",
@@ -921,11 +929,11 @@ function onSection() {
 
     onCommand(COMMAND_STOP_SPINDLE);
     setCoolant(COOLANT_OFF);
-
+    /* Noah commented this out December 5th. Removing optional stop before tool changes. This causes confusion.
     if (!isFirstSection() && getProperty("optionalStop")) {
       onCommand(COMMAND_OPTIONAL_STOP);
     }
-
+    */
     if ((tool.number < 0) || (tool.number > 31)) {
       warning(localize("Tool number should be between 0 and 31."));
     }
@@ -2171,7 +2179,11 @@ function onClose() {
 
   setWorkPlane(new Vector(0, 0, 0)); // reset working plane
 
-  writeRetract(X, Y);
+  if ( getProperty("useParking")) {
+    writeBlock(gFormat.format(30)); // go to parking position.
+  } else{
+    writeRetract(X, Y); //if paramenter not set, go to X Y home
+  }
 
   onImpliedCommand(COMMAND_END);
   onImpliedCommand(COMMAND_STOP_SPINDLE);
