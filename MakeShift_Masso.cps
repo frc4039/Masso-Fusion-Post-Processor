@@ -2177,7 +2177,7 @@ function onClose() {
 
   writeRetract(Z);
 
-  writeBlock(mFormat.format(5)); //Noah added Dec 6th, 2022. Stop spindle as soon as z is retracted.
+  onCommand(COMMAND_STOP_SPINDLE); //Noah added Dec 6th, 2022. Stop spindle as soon as z is retracted.
 
   setWorkPlane(new Vector(0, 0, 0)); // reset working plane
 
