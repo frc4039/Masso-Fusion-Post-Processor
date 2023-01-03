@@ -202,12 +202,12 @@ var singleLineCoolant = false; // specifies to output multiple coolant codes in 
 // {id: COOLANT_THROUGH_TOOL, on: [8, 88], off: [9, 89]}
 // {id: COOLANT_THROUGH_TOOL, on: "M88 P3 (myComment)", off: "M89"}
 var coolants = [
-  {id:COOLANT_FLOOD, on:8},
-  {id:COOLANT_MIST, on:7},
+  {id:COOLANT_FLOOD}, // Noah removed Jan 2, 2023
+  {id:COOLANT_MIST}, // Noah removed Jan 2, 2023
   {id:COOLANT_THROUGH_TOOL},
-  {id:COOLANT_AIR},
+  {id:COOLANT_AIR, on:8}, // Noah added Jan 2, 2023
   {id:COOLANT_AIR_THROUGH_TOOL},
-  {id:COOLANT_SUCTION},
+  {id:COOLANT_SUCTION, on:7}, // Noah added Jan 2, 2023
   {id:COOLANT_FLOOD_MIST},
   {id:COOLANT_FLOOD_THROUGH_TOOL},
   {id:COOLANT_OFF, off:9}
